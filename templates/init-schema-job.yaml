@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+    name: {{ include "hive-metastore.fullname" . }}-initschema
+spec:
+  template:
+    spec:
+      automountServiceAccountToken: false
+      containers:
+      - name: {{ .Chart.Name }}
+        securityContext:
+          {{- toYaml .Values.securityContext | nindent 12 }}
+        image: "{{ .Values.image.registry }}/{{ .Values.image.imagename }}:{{ .Values.image.tag }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command: ["/opt/hive-metastore/bin/schematool"]
+        args: ["--verbose" ,"-initSchema" , "-dbType", "$(DB_TYPE)" ,"-driver","$(CONNECTION_DRIVER)","-userName", "$(CONNECTION_USER)",
+          "-passWord", "$(CONNECTION_PASSWORD)" , "-url", "$(CONNECTION_URI)", "-ifNotExists"]
+        envFrom:
+          - configMapRef:
+              name: {{ template "hive-metastore.fullname" . }}-initschema-cfg
+        env:
+          - name: CONNECTION_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.mysql.secretName }}
+                key: rootpassword
+      restartPolicy: Never
+  backoffLimit: 0
