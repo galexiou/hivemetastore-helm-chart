@@ -1,4 +1,8 @@
 <configuration>
+	<property>
+		<name>metastore.thrift.uris</name>
+		<value>thrift://hive-metastore.hive-metastore.svc.cluster.local:9083</value>
+	</property>
 <property>
 	<name>metastore.task.threads.always</name>
 	<value>org.apache.hadoop.hive.metastore.events.EventCleanerTask</value>
