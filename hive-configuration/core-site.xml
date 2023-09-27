@@ -21,7 +21,7 @@
   </property>
   <property>
     <name>fs.azure.account.key.edabdstorage.dfs.core.windows.net</name>
-    <value>4FU2Snhgntx15rw1rNByEDll37WkDBkdZAI25sTN3WLqa0PRrGr0k+yFvH0OY6tXlNxpUmEmqV6BVIQCw1P2Pw==</value>
+    <value></value>
     <description>
     The secret password. Never share these.
     </description>
