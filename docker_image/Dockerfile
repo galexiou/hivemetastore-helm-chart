@@ -1,7 +1,7 @@
 FROM openjdk:11-slim
 
 ARG HADOOP_VERSION=3.3.1
-ARG HIVE_VERSION=3.0.0
+ARG HIVE_VERSION=4.0.0
 
 
 RUN mkdir /opt/hadoop
