@@ -3,7 +3,7 @@
 set -e
 
 REPONAME=galexiou
-TAG=hivemetastore:4
+TAG=hivemetastore:34J
 
 docker build -t $TAG .
 
