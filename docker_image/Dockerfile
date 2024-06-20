@@ -37,7 +37,12 @@ RUN curl https://archive.apache.org/dist/hive/hive-standalone-metastore-$HIVE_VE
 	&& mv -v /opt/apache-hive-metastore-$HIVE_VERSION-bin/* /opt/hive-metastore
 
 # Download and install the mysql connector.
-RUN curl -L https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.28.tar.gz \
-	| tar xvz -C /opt/ \
-	&& ln -s /opt/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar /opt/hadoop/share/hadoop/common/lib/ \
-	&& ln -s /opt/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar /opt/hive-metastore/lib/
+# RUN curl -L https://dev.mysql.com/get/Downloads/Connector-J/mysql-connector-java-8.0.28.tar.gz \
+# 	| tar xvz -C /opt/ \
+# 	&& ln -s /opt/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar /opt/hadoop/share/hadoop/common/lib/ \
+# 	&& ln -s /opt/mysql-connector-java-8.0.28/mysql-connector-java-8.0.28.jar /opt/hive-metastore/lib/
+
+
+RUN curl -L https://downloads.mariadb.com/Connectors/java/connector-java-3.4.0/mariadb-java-client-3.4.0.jar -o /opt/mariadb-java-client-3.4.0.jar \
+	&& ln -s /opt/mariadb-java-client-3.4.0.jar /opt/hadoop/share/hadoop/common/lib/mariadb-java-client-3.4.0.jar \
+    && ln -s /opt/mariadb-java-client-3.4.0.jar /opt/hive-metastore/lib/mariadb-java-client-3.4.0.jar
